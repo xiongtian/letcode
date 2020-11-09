@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author yd
+ * @author xiongtian
  * @version 1.0
  * @date 2020/11/6 17:04
  *
@@ -16,7 +16,7 @@ import java.util.Map;
  *
  *
  */
-public class question2 {
+public class Question02 {
 
     public static void main(String[] args) {
         int[] arrs = {0,4,3,0};

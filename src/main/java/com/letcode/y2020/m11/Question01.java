@@ -12,7 +12,7 @@ import java.util.Arrays;
  * 如果存在多个数字二进制中 1 的数目相同，则必须将它们按照数值大小升序排列。
  * 请你返回排序后的数组。
  */
-public class question1 {
+public class Question01 {
     public static void main(String[] args) {
 
         int[] arrs = {1,5,8,9,66,22,77};
