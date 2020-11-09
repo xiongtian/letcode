@@ -41,7 +41,6 @@ public class Question03 {
 
         }
 
-        int a= 2^23;
         if (-Math.pow(2,31)>= result || Math.pow(2,31) <= result){
             return 0;
         }
