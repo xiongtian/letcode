@@ -19,29 +19,27 @@ public class Question03 {
         Question03 q = new Question03();
         int a = 1233455;
         q.reverse3(21);
-       // System.out.println(q.reverse4(21));
-        System.out.println(2/10);
-        System.out.println(q.reverse(a));
     }
+
     public int reverse(int x) {
 
-        int result=0;
+        int result = 0;
         char[] chars = null;
         String s = String.valueOf(x);
-        if (s.contains("-")){
+        if (s.contains("-")) {
             chars = s.substring(1).toCharArray();
             this.reverseArrays(chars);
-            result =- Integer.parseInt(String.valueOf(chars));
+            result = -Integer.parseInt(String.valueOf(chars));
 
-        }else {
+        } else {
             chars = s.toCharArray();
             this.reverseArrays(chars);
-          String a=  String.valueOf(chars);
-            result =Integer.parseInt(String.valueOf(chars));
+            String a = String.valueOf(chars);
+            result = Integer.parseInt(String.valueOf(chars));
 
         }
 
-        if (-Math.pow(2,31)>= result || Math.pow(2,31) <= result){
+        if (-Math.pow(2, 31) >= result || Math.pow(2, 31) <= result) {
             return 0;
         }
         return result;
@@ -49,14 +47,15 @@ public class Question03 {
 
     /**
      * 将数组反转
+     *
      * @param chars
      */
-    public void reverseArrays(char[] chars){
-        if (null!=chars && chars.length>0) {
+    public void reverseArrays(char[] chars) {
+        if (null != chars && chars.length > 0) {
             char temp;
-            int mid=chars.length / 2;
+            int mid = chars.length / 2;
             for (int i = 0; i < mid; i++) {
-                for (int j = chars.length - 1-i; j >= chars.length - 1-i; j--) {
+                for (int j = chars.length - 1 - i; j >= chars.length - 1 - i; j--) {
 
                     temp = chars[i];
                     chars[i] = chars[j];
@@ -65,18 +64,20 @@ public class Question03 {
             }
         }
     }
+
     public int reverse2(int x) {
         long n = 0;
-        while(x != 0) {
-            n = n*10 + x%10;
-            x = x/10;
+        while (x != 0) {
+            n = n * 10 + x % 10;
+            x = x / 10;
         }
-        return (int)n==n? (int)n:0;
+        return (int) n == n ? (int) n : 0;
     }
 
     /**
      * 官方的方法
-     *我们可以一次构建反转整数的一位数字。在这样做的时候，我们可以预先检查向原整数附加另一位数字是否会导致溢出。
+     * 我们可以一次构建反转整数的一位数字。在这样做的时候，我们可以预先检查向原整数附加另一位数字是否会导致溢出。
+     *
      * @param x
      * @return
      */
@@ -85,8 +86,9 @@ public class Question03 {
         while (x != 0) {
             int pop = x % 10;
             x /= 10;
-            if (rev > Integer.MAX_VALUE/10 || (rev == Integer.MAX_VALUE / 10 && pop > 7)) return 0;
-            if (rev < Integer.MIN_VALUE/10 || (rev == Integer.MIN_VALUE / 10 && pop < -8)) return 0;
+            // 判断 temp=rev⋅10+pop 是否溢出
+            if (rev > Integer.MAX_VALUE / 10 || (rev == Integer.MAX_VALUE / 10 && pop > 7)) return 0;
+            if (rev < Integer.MIN_VALUE / 10 || (rev == Integer.MIN_VALUE / 10 && pop < -8)) return 0;
             rev = rev * 10 + pop;
         }
         return rev;
@@ -102,8 +104,23 @@ public class Question03 {
         }
         try {
             return Integer.valueOf((new StringBuilder(string)).reverse().toString()) * flag;
-        }catch (Exception e){
+        } catch (Exception e) {
             return 0;
         }
+    }
+
+    public int reverse6(int x) {
+        long temp = 0;
+
+        while(x != 0){
+            int pop = x % 10;
+            temp = temp * 10 + pop;
+
+            if(temp > Integer.MAX_VALUE || temp < Integer.MIN_VALUE){
+                return 0;
+            }
+            x /= 10;
+        }
+        return (int)temp;
     }
 }
