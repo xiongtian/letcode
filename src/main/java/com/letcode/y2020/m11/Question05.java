@@ -34,7 +34,7 @@ public class Question05 {
     public static void main(String[] args) {
         String s = "MCMXCVI";
         Question05 question05 = new Question05();
-        int i = question05.romanToInt(s);
+        int i = question05.romanToInt1(s);
         System.out.println(i);
     }
 
@@ -68,6 +68,27 @@ public class Question05 {
 
         return result;
 
+    }
+
+    /**
+     * LetCode解法
+     * @param s
+     * @return
+     */
+    public int romanToInt1(String s) {
+        int sum = 0;
+        int preNum  = romtoInt(s.charAt(0));
+        for (int i = 1; i < s.length(); i++) {
+            int num  = romtoInt(s.charAt(i));
+            if (preNum < num) {
+                sum -=preNum;
+            }else {
+                sum += preNum;
+            }
+            preNum = num;
+        }
+        sum +=preNum;
+        return sum;
     }
 
 
