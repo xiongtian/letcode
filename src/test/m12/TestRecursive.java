@@ -14,11 +14,26 @@ public class TestRecursive {
         TestRecursive t = new TestRecursive();
 
         // 递归
+        System.out.println(t.addAll(5));
         System.out.println(t.factorial(5));
-
+        System.out.println(t.exponentiating(0,0));
         // 斐波那契数列
         System.out.println(t.fib(5));
         System.out.println(t.fib1(5));
+    }
+
+
+    /**
+     * 累加
+     *
+     * @param n
+     * @return
+     */
+    public int addAll(int n) {
+        if (n == 0) {
+            return 0;
+        }
+        return n + addAll(n - 1);
     }
 
     /**
@@ -29,6 +44,22 @@ public class TestRecursive {
             return 1;
         }
         return n * factorial(--n);
+    }
+
+    /**
+     * 求幂
+     * @param n
+     * @param m
+     * @return
+     */
+    public int exponentiating(int n, int m) {
+        if (m == 0) {
+            return 1;
+        }
+        if (m == 1) {
+            return n;
+        }
+        return n * exponentiating(n, m - 1);
     }
 
     /**
@@ -65,16 +96,17 @@ public class TestRecursive {
 
     /**
      * 为了符合letcode的时间复杂度，另一种使用动态规划的解题方法
+     *
      * @param n
      * @return
      */
-    public int fib2(int n){
-        if(n == 0) return 0;
+    public int fib2(int n) {
+        if (n == 0) return 0;
         int[] dp = new int[n + 1];
         dp[0] = 0;
         dp[1] = 1;
-        for(int i = 2; i <= n; i++){
-            dp[i] = dp[i-1] + dp[i-2];
+        for (int i = 2; i <= n; i++) {
+            dp[i] = dp[i - 1] + dp[i - 2];
             dp[i] %= 1000000007;
         }
         return dp[n];
