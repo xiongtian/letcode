@@ -24,7 +24,7 @@ public class Question04 {
         String[] array = new String[]{
                 "1", "2", "3"
         };
-        test.listAll(Arrays.asList(array), " ");
+        //test.listAll(Arrays.asList(array), " ");
     }
 
 
@@ -72,9 +72,18 @@ public class Question04 {
         }
     }
 
+    /**
+     * 1
+     * 12
+     * 123
+     * 13
+     * 132
+     *
+     * @param candidate
+     * @param prefix
+     */
     public void listAll(List<String> candidate, String prefix) {
         System.out.println(prefix);
-
         for (int i = 0; i < candidate.size(); i++) {
             List<String> temp = new LinkedList<String>(candidate);//new LinkedList<String>(candidate)---copy candidate
             listAll(temp, prefix + temp.remove(i));
