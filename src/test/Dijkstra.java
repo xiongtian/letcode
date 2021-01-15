@@ -6,7 +6,7 @@ import java.util.List;
  * @author xiongtian
  * @version 1.0
  * @date 2021/1/12 20:17
- * 狄克斯特拉算法
+ * 狄杰斯特拉算法
  */
 public class Dijkstra {
     public static void main(String[] args) {
@@ -49,8 +49,15 @@ public class Dijkstra {
         dijkstra.handle("A", "H", allMap);
     }
 
+    /**
+     * 找出待处理的里面，时间最小的
+     * @param costs 到每个节点所需要的时间
+     * @param hasHandleList 已经处理过得节点集合
+     * @return
+     */
     private String getMiniCostKey(HashMap<String, Integer> costs, List<String> hasHandleList) {
         int mini = Integer.MAX_VALUE;
+        // 注意 是null 不能是 ""
         String miniKey = null;
         for (String key : costs.keySet()) {
             if (!hasHandleList.contains(key)) {
@@ -82,11 +89,10 @@ public class Dijkstra {
             parentMap.put(key, startKey);
         }
 
-
         //选择最"便宜"的节点，这边即耗费时间最低的
         String minCostKey = getMiniCostKey(costMap, hasHandleList);
         while (minCostKey != null) {
-            System.out.print("处理节点：" + minCostKey);
+            System.out.println("处理节点：" + minCostKey);
             HashMap<String, Integer> nodeMap = all.get(minCostKey);
             if (nodeMap != null) {
                 //该节点没有子节点可以处理了，末端节点
@@ -95,27 +101,39 @@ public class Dijkstra {
             //添加该节点到已处理结束的列表中
             hasHandleList.add(minCostKey);
             //再次获取下一个最便宜的节点
+            // 注意 是costMap 不是codeMap
             minCostKey = getMiniCostKey(costMap, hasHandleList);
         }
         if (parentMap.containsKey(target)) {
-            System.out.print("到目标节点" + target + "最低耗费:" + costMap.get(target));
+            System.out.println("到目标节点" + target + "最低耗费:" + costMap.get(target));
             List<String> pathList = new ArrayList<String>();
             String parentKey = parentMap.get(target);
             while (parentKey != null) {
                 pathList.add(0, parentKey);
                 parentKey = parentMap.get(parentKey);
             }
+            // 注意是target
             pathList.add(target);
             String path = "";
             for (String key : pathList) {
-                path = path + key + " --> ";
+                path +=key;
+                if (!key.equals(target)) {
+                    path += "-->";
+                }
             }
-            System.out.print("路线为" + path);
+            System.out.println("路线为" + path);
         } else {
             System.out.print("不存在到达" + target + "的路径");
         }
     }
 
+    /**
+     *
+     * @param startKey
+     * @param nodeMap
+     * @param costMap
+     * @param parentMap
+     */
     private void handleNode(String startKey, HashMap<String, Integer> nodeMap, HashMap<String, Integer> costMap, HashMap<String, String> parentMap) {
 
         for (String key : nodeMap.keySet()) {
@@ -138,7 +156,7 @@ public class Dijkstra {
                     //更新到达该节点的父节点和消费时间对应的散列表
                     costMap.put(key, cost);
                     parentMap.put(key, startKey);
-                    System.out.print("更新节点：" + key + ",cost:" + oldCost + " --> " + cost);
+                    System.out.println("更新节点：" + key + ",cost:" + oldCost + " --> " + cost);
                 }
             }
         }

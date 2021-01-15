@@ -30,7 +30,7 @@ public class BFS {
     }
 
 
-    public static  void printSearPath(Node target) {
+    public static void printSearPath(Node target) {
         if (target != null) {
             System.out.println("找到了目标节点：" + target.id + "\n");
 
@@ -49,13 +49,12 @@ public class BFS {
                 }
             }
             System.out.println("步数最短：" + path);
-        }
-        else {
+        } else {
             System.out.println("未找到目标节点！");
         }
     }
 
-   public static Node findTarget(String startId, String targetId, HashMap<String, String[]> map) {
+    public static Node findTarget(String startId, String targetId, HashMap<String, String[]> map) {
         List<String> hasSearchList = new ArrayList<>();
         LinkedBlockingQueue<Node> queue = new LinkedBlockingQueue();
         queue.offer(new Node(startId, null));
